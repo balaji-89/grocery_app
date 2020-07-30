@@ -4,11 +4,14 @@ import './screens/home.dart';
 import 'package:provider/provider.dart';
 import './providers/location_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'providers/image_provider.dart';
+//bestValues //featured products //fresh arrivals
 
 void main() => runApp(MultiProvider(providers: [
       ChangeNotifierProvider(
-        create: (context) => Location(),
+        create: (context) => Location()
       ),
+
     ], child: GroceryApp()));
 
 class GroceryApp extends StatefulWidget {
@@ -307,7 +310,7 @@ class _GroceryAppState extends State<GroceryApp> {
             ),
           ),
         ),
-        body: HomeScreen(),
+        body: ChangeNotifierProvider(create: (context)=>ProvidesImages(),child: HomeScreen()),
 
       ),
     );

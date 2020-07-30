@@ -45,6 +45,7 @@ class Location with ChangeNotifier{
       'id':7,
       'icon':Icon(Icons.info_outline,color:Colors.black54,size: 23,),
       'title':'Faq',
+
     },
     {
       'id':8,
@@ -53,7 +54,7 @@ class Location with ChangeNotifier{
     },
   ];
 
-  List<String> get branches  =>[...storeBranches];
+  List<String> get branches  => [...storeBranches];
 
   void branchSelection(String selectedBranch){
      defaultBranch=selectedBranch;
