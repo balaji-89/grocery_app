@@ -181,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 13,
             ),
             Container(
-              height: MediaQuery.of(context).size.height * 0.18,
+              height: MediaQuery.of(context).size.height * 0.19,
               child: ListView.builder(
                 scrollDirection:Axis.horizontal,
                 itemCount: categoryImages.length,
@@ -219,8 +219,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             child:
                                 Image.asset(categoryImages[index]['imageUrl'],fit:BoxFit.fill)),
                       ),
+
                       FittedBox(
                         child: Container(
+                          margin:EdgeInsets.only(top:5),
                           child: Text(
                             '${categoryImages[index]['category']}',
                             style: TextStyle(

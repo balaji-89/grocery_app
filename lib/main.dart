@@ -176,7 +176,7 @@ class _GroceryAppState extends State<GroceryApp> {
                 child: CircleAvatar(
                   radius: 21,
                   backgroundColor: Colors.deepOrange,
-                  child: Image.asset('assets/images/profile_cartoon.png'),
+                  child: Image.asset('assets/images/appbar_profile/profile_cartoon.png'),
                 ),
               ),
               itemBuilder: (ctx) {

@@ -20,7 +20,10 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/
+    -  assets/images/appbar_profile/
+    -  assets/images/carousel/
+    -  assets/images/category_graphics/
+    -  assets/images/individual_items/
 
 analyzer:
   enable-experiment:
