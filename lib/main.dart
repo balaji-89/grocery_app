@@ -1,17 +1,17 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import './screens/home.dart';
 import 'package:provider/provider.dart';
-import './providers/location_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+
+import './screens/home.dart';
+import './providers/location_provider.dart';
 import 'providers/image_provider.dart';
+import 'providers/single_item_provider.dart';
 //bestValues //featured products //fresh arrivals
 
 void main() => runApp(MultiProvider(providers: [
-      ChangeNotifierProvider(
-        create: (context) => Location()
-      ),
-
+      ChangeNotifierProvider(create: (context) => Location()),
     ], child: GroceryApp()));
 
 class GroceryApp extends StatefulWidget {
@@ -33,6 +33,7 @@ class _GroceryAppState extends State<GroceryApp> {
       theme: ThemeData(
           textTheme: GoogleFonts.exo2TextTheme(Theme.of(context).textTheme),
           primaryColor: Colors.deepOrange,
+          accentColor: Colors.redAccent,
           backgroundColor: Colors.white),
       title: 'Grocery App',
       debugShowCheckedModeBanner: false,
@@ -176,7 +177,8 @@ class _GroceryAppState extends State<GroceryApp> {
                 child: CircleAvatar(
                   radius: 21,
                   backgroundColor: Colors.deepOrange,
-                  child: Image.asset('assets/images/appbar_profile/profile_cartoon.png'),
+                  child: Image.asset(
+                      'assets/images/appbar_profile/profile_cartoon.png'),
                 ),
               ),
               itemBuilder: (ctx) {
@@ -241,8 +243,7 @@ class _GroceryAppState extends State<GroceryApp> {
             preferredSize: Size.fromHeight(60),
             child: Column(
               children: <Widget>[
-
-              Container(height:1,color:Colors.grey.withOpacity(0.5)),
+                Container(height: 1, color: Colors.grey.withOpacity(0.5)),
                 Container(
                   height: 50,
                   width: double.infinity,
@@ -251,7 +252,7 @@ class _GroceryAppState extends State<GroceryApp> {
                     children: [
                       Container(
                           child: IconButton(
-                            onPressed: null,
+                        onPressed: null,
                         icon: Icon(
                           Icons.widgets,
                           color: Colors.black54,
@@ -263,17 +264,20 @@ class _GroceryAppState extends State<GroceryApp> {
                             Container(
                               decoration: BoxDecoration(
                                   color: Colors.deepOrange,
-                                gradient:LinearGradient(begin:Alignment.topLeft,end:Alignment.bottomRight,colors: [
-                                  Colors.deepOrange[300],
-                                  Colors.deepOrange[300],
-                                  Colors.deepOrange[600],
-                                  Colors.deepOrange[900],
-                                ]),
-                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),topLeft: Radius.circular(10),
-                                  )
-                              ),
-
-                              width:70,
+                                  gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [
+                                        Colors.deepOrange[300],
+                                        Colors.deepOrange[300],
+                                        Colors.deepOrange[600],
+                                        Colors.deepOrange[900],
+                                      ]),
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(10),
+                                    topLeft: Radius.circular(10),
+                                  )),
+                              width: 70,
                               height: 80,
                               child: Icon(
                                 Icons.shopping_cart,
@@ -282,17 +286,19 @@ class _GroceryAppState extends State<GroceryApp> {
                               ),
                             ),
                             Container(
-                              decoration:BoxDecoration(
-                                gradient:LinearGradient(begin:Alignment.topLeft,end:Alignment.bottomRight,colors: [
-                                  Colors.red[300],
-                                  Colors.red[300],
-                                  Colors.red[600],
-                                  Colors.red[900],
-                                ]),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                    colors: [
+                                      Colors.red[300],
+                                      Colors.red[300],
+                                      Colors.red[600],
+                                      Colors.red[900],
+                                    ]),
                                 color: Colors.redAccent,
                               ),
-
-                              width:70,
+                              width: 70,
                               height: 80,
                               child: Icon(
                                 Icons.search,
@@ -310,8 +316,14 @@ class _GroceryAppState extends State<GroceryApp> {
             ),
           ),
         ),
-        body: ChangeNotifierProvider(create: (context)=>ProvidesImages(),child: HomeScreen()),
-
+        body: MultiProvider(providers: [
+          ChangeNotifierProvider(
+            create: (context) => ProvidesImages(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => ShoppingItems(),
+          ),
+        ], child: HomeScreen()),
       ),
     );
   }

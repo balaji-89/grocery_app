@@ -17,15 +17,14 @@ class IndividualItem {
   List<int> availableWeights;
   double discountedAmount;
 
-  IndividualItem(
-      {this.productId,
-      this.productName,
-      this.imageUrl,
-      this.category,
-      this.originalPrice,
-      this.weight,
-      this.availableWeights,
-      this.discountedAmount});
+  IndividualItem({this.productId,
+    this.productName,
+    this.imageUrl,
+    this.category,
+    this.originalPrice,
+    this.weight,
+    this.availableWeights,
+    this.discountedAmount});
 }
 
 class ShoppingItems with ChangeNotifier {
@@ -39,13 +38,13 @@ class ShoppingItems with ChangeNotifier {
         category: 'Vegetables',
         discountedAmount: 74),
     IndividualItem(
-        productId: 02,
-        productName: 'Onion',
-        imageUrl: 'assets/images/individual_items/Onion_item.jpg',
-        weight: 500,
-        originalPrice: 50,
-        category: 'Vegetables',
-        ),
+      productId: 02,
+      productName: 'Onion',
+      imageUrl: 'assets/images/individual_items/Onion_item.jpg',
+      weight: 500,
+      originalPrice: 50,
+      category: 'Vegetables',
+    ),
     IndividualItem(
         productId: 03,
         productName: 'Carrot',
@@ -79,28 +78,28 @@ class ShoppingItems with ChangeNotifier {
         category: 'Fruits',
         discountedAmount: 74),
     IndividualItem(
-        productId: 07,
-        productName: 'Strawberry',
-        imageUrl: 'assets/images/individual_items/Strawberry_item.png',
-        weight: 500,
-        originalPrice: 75,
-        category: 'Fruits',
-        ),
+      productId: 07,
+      productName: 'Strawberry',
+      imageUrl: 'assets/images/individual_items/Strawberry_item.png',
+      weight: 500,
+      originalPrice: 75,
+      category: 'Fruits',
+    ),
     IndividualItem(
-        productId: 08,
-        productName: 'Mango',
-        imageUrl: 'assets/images/individual_items/Mango_item.jpg',
-        weight: 500,
-        originalPrice: 55,
-        category: 'Fruits',
-        discountedAmount: 40,
+      productId: 08,
+      productName: 'Mango',
+      imageUrl: 'assets/images/individual_items/Mango_item.jpg',
+      weight: 500,
+      originalPrice: 55,
+      category: 'Fruits',
+      discountedAmount: 40,
     ),
     IndividualItem(
       productId: 09,
       productName: 'Apple Juice',
       imageUrl: 'assets/images/individual_items/AppleJuice_item.png',
       weight: 100,
-      originalPrice:30,
+      originalPrice: 30,
       category: 'Beverages',
 
     ),
@@ -109,7 +108,7 @@ class ShoppingItems with ChangeNotifier {
       productName: 'Mango Juice',
       imageUrl: 'assets/images/individual_items/MangiJuice_item.png',
       weight: 100,
-      originalPrice:20,
+      originalPrice: 20,
       category: 'Beverages',
       discountedAmount: 15,
     ),
@@ -187,7 +186,7 @@ class ShoppingItems with ChangeNotifier {
       discountedAmount: 475,
     ),
     IndividualItem(
-      productId:19,
+      productId: 19,
       productName: 'Taco Shells',
       imageUrl: 'assets/images/TacoShells_item.jpg',
       weight: 50,
@@ -196,7 +195,7 @@ class ShoppingItems with ChangeNotifier {
       discountedAmount: 40,
     ),
     IndividualItem(
-      productId:20,
+      productId: 20,
       productName: 'Beans',
       imageUrl: 'assets/images/Beans.jpg',
       weight: 50,
@@ -205,7 +204,7 @@ class ShoppingItems with ChangeNotifier {
       discountedAmount: 40,
     ),
     IndividualItem(
-      productId:21,
+      productId: 21,
       productName: 'Colgate Toothpaste',
       imageUrl: 'assets/images/Colgate_item.jpg',
       weight: 100,
@@ -213,7 +212,7 @@ class ShoppingItems with ChangeNotifier {
       category: 'Groceries',
     ),
     IndividualItem(
-      productId:22,
+      productId: 22,
       productName: 'Colgate-Maxfresh ToothPaste ',
       imageUrl: 'assets/images/ColgateMaxFresh_item.png',
       weight: 100,
@@ -222,7 +221,7 @@ class ShoppingItems with ChangeNotifier {
 
     ),
     IndividualItem(
-      productId:23,
+      productId: 23,
       productName: 'COlogate_Mouthwash',
       imageUrl: 'assets/images/CologateMouthWash_item.png',
       weight: 50,
@@ -231,7 +230,7 @@ class ShoppingItems with ChangeNotifier {
       discountedAmount: 40,
     ),
     IndividualItem(
-      productId:24,
+      productId: 24,
       productName: 'Colgate White',
       imageUrl: 'assets/images/ColgateWhite_item.png',
       weight: 100,
@@ -239,7 +238,7 @@ class ShoppingItems with ChangeNotifier {
       category: 'Groceries',
     ),
     IndividualItem(
-      productId:25,
+      productId: 25,
       productName: 'Taco Shells',
       imageUrl: 'assets/images/TacoShells_item.jpg',
       weight: 50,
@@ -248,7 +247,7 @@ class ShoppingItems with ChangeNotifier {
       discountedAmount: 40,
     ),
     IndividualItem(
-      productId:26,
+      productId: 26,
       productName: 'Milk',
       imageUrl: 'assets/images/Milk_item.png',
       weight: 500,
@@ -258,7 +257,7 @@ class ShoppingItems with ChangeNotifier {
     ),
 
     IndividualItem(
-      productId:28,
+      productId: 28,
       productName: 'IceCream',
       imageUrl: 'assets/images/IceCream_item.png',
       weight: 250,
@@ -267,7 +266,7 @@ class ShoppingItems with ChangeNotifier {
       discountedAmount: 230,
     ),
     IndividualItem(
-      productId:29,
+      productId: 29,
       productName: 'Cheese',
       imageUrl: 'assets/images/Cheese_item.png',
       weight: 50,
@@ -275,31 +274,20 @@ class ShoppingItems with ChangeNotifier {
       category: 'DiaryProducts',
       discountedAmount: 40,
     ),
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    IndividualItem(
+      productId: 30,
+      productName: 'Ashirvaad',
+      imageUrl: 'assets/images/Aashirvaad_item.png',
+      weight: 500,
+      originalPrice: 150,
+      category: 'Groceries',
+      discountedAmount: 130,
+    ),
   ];
+
+
+
+  List<IndividualItem> get getDiscountedData{
+    return [...itemsList.where((element) => element.discountedAmount !=null,),];
+  }
 }
