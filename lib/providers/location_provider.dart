@@ -54,6 +54,7 @@ class Location with ChangeNotifier{
     },
   ];
 
+
   List<String> get branches  => [...storeBranches];
 
   void branchSelection(String selectedBranch){

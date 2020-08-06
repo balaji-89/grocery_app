@@ -1,14 +1,12 @@
-
+import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 
 import './screens/home.dart';
 import './providers/location_provider.dart';
 import 'providers/image_provider.dart';
 import 'providers/single_item_provider.dart';
-//bestValues //featured products //fresh arrivals
 
 void main() => runApp(MultiProvider(providers: [
       ChangeNotifierProvider(create: (context) => Location()),
@@ -24,11 +22,6 @@ class _GroceryAppState extends State<GroceryApp> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> branches =
-        Provider.of<Location>(context, listen: false).branches;
-    String defaultBranch =
-        Provider.of<Location>(context, listen: true).defaultBranch;
-
     return MaterialApp(
       theme: ThemeData(
           textTheme: GoogleFonts.exo2TextTheme(Theme.of(context).textTheme),
@@ -83,8 +76,8 @@ class _GroceryAppState extends State<GroceryApp> {
                   builder: (context, location, child) =>
                       DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
-                      value: defaultBranch,
-                      items: branches.map(
+                      value: location.defaultBranch,
+                      items: location.storeBranches.map(
                         (branch) {
                           return DropdownMenuItem<String>(
                             value: branch,
@@ -324,6 +317,24 @@ class _GroceryAppState extends State<GroceryApp> {
             create: (context) => ShoppingItems(),
           ),
         ], child: HomeScreen()),
+        bottomNavigationBar: BubbleBottomBar(
+          opacity: null,
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(8), topLeft: Radius.circular(8)),
+           elevation: 8,
+           backgroundColor: Colors.white,
+           iconSize: 15,
+           currentIndex: 0,
+           hasInk: true,
+           inkColor: Theme.of(context).primaryColor,
+           //onTap: ,
+                     items: [
+                       BubbleBottomBarItem(title:Text('Home'),icon:Icon(Icons.home,color: Colors.black,),activeIcon: Icon(Icons.home,color:Theme.of(context).primaryColor,) ),
+                       BubbleBottomBarItem(title:Text('Home'),icon:Icon(Icons.home,color: Colors.black,),activeIcon: Icon(Icons.home,color:Theme.of(context).primaryColor,) ),
+    BubbleBottomBarItem(title:Text('Home'),icon:Icon(Icons.home,color: Colors.black,),activeIcon: Icon(Icons.home,color:Theme.of(context).primaryColor,) ),
+    BubbleBottomBarItem(title:Text('Home'),icon:Icon(Icons.home,color: Colors.black,),activeIcon: Icon(Icons.home,color:Theme.of(context).primaryColor,) ),
+                     ],
+        ),
       ),
     );
   }
