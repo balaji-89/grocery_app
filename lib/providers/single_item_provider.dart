@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class IndividualItem {
-  @required
-  int productId;
+  @required int productId;
   @required
   String productName;
   @required
@@ -13,6 +12,7 @@ class IndividualItem {
   double originalPrice;
   @required
   int weight;
+  @required int weightCategory;
   @required
   List<int> availableWeights;
   double discountedAmount;
@@ -22,12 +22,14 @@ class IndividualItem {
     this.imageUrl,
     this.category,
     this.originalPrice,
+    this.weightCategory,
     this.weight,
     this.availableWeights,
     this.discountedAmount});
 }
 
 class ShoppingItems with ChangeNotifier {
+  List<String> weightUnit=['g','kg','ml','l','nos'];
   List<IndividualItem> itemsList = [
     IndividualItem(
         productId: 01,
@@ -36,6 +38,7 @@ class ShoppingItems with ChangeNotifier {
         weight: 500,
         originalPrice: 74,
         category: 'Vegetables',
+        weightCategory: 1 ,
         discountedAmount: 40),
     IndividualItem(
       productId: 02,
@@ -43,6 +46,7 @@ class ShoppingItems with ChangeNotifier {
       imageUrl: 'assets/images/individual_items/Onion_item.jpg',
       weight: 500,
       originalPrice: 50,
+      weightCategory: 1 ,
       category: 'Vegetables',
     ),
     IndividualItem(
@@ -52,6 +56,7 @@ class ShoppingItems with ChangeNotifier {
         weight: 500,
         originalPrice: 50,
         category: 'Vegetables',
+        weightCategory: 1 ,
         discountedAmount: 40),
     IndividualItem(
         productId: 04,
@@ -60,6 +65,7 @@ class ShoppingItems with ChangeNotifier {
         weight: 500,
         originalPrice: 30,
         category: 'Vegetables',
+        weightCategory: 1 ,
         discountedAmount: 25),
     IndividualItem(
         productId: 05,
@@ -68,6 +74,7 @@ class ShoppingItems with ChangeNotifier {
         weight: 500,
         originalPrice: 74,
         category: 'Fruits',
+        weightCategory: 1 ,
         discountedAmount: 60),
     IndividualItem(
         productId: 06,
@@ -76,6 +83,7 @@ class ShoppingItems with ChangeNotifier {
         weight: 500,
         originalPrice: 75,
         category: 'Fruits',
+        weightCategory: 1 ,
         discountedAmount: 70),
     IndividualItem(
       productId: 07,
@@ -84,6 +92,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 500,
       originalPrice: 75,
       category: 'Fruits',
+      weightCategory: 1 ,
     ),
     IndividualItem(
       productId: 08,
@@ -92,6 +101,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 500,
       originalPrice: 55,
       category: 'Fruits',
+      weightCategory: 1 ,
       discountedAmount: 40,
     ),
     IndividualItem(
@@ -100,6 +110,7 @@ class ShoppingItems with ChangeNotifier {
       imageUrl: 'assets/images/individual_items/AppleJuice_item.png',
       weight: 100,
       originalPrice: 30,
+      weightCategory: 2 ,
       category: 'Beverages',
 
     ),
@@ -110,6 +121,7 @@ class ShoppingItems with ChangeNotifier {
       imageUrl: 'assets/images/individual_items/PineappleJuice_item.png',
       weight: 100,
       originalPrice: 30,
+      weightCategory: 2 ,
       category: 'Beverages',
 
     ),
@@ -120,6 +132,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 100,
       originalPrice: 30,
       category: 'Beverages',
+      weightCategory: 2 ,
       discountedAmount: 20,
     ),
     IndividualItem(
@@ -128,6 +141,7 @@ class ShoppingItems with ChangeNotifier {
       imageUrl: 'assets/images/individual_items/Mango_item.jpg',
       weight: 100,
       originalPrice: 50,
+      weightCategory: 2 ,
       category: 'Beverages',
 
     ),
@@ -137,6 +151,7 @@ class ShoppingItems with ChangeNotifier {
       imageUrl: 'assets/images/individual_items/Egg_item.png',
       weight: 1,
       originalPrice: 5,
+      weightCategory: 4,
       category: 'Groceries',
 
     ),
@@ -146,6 +161,7 @@ class ShoppingItems with ChangeNotifier {
       imageUrl: 'assets/images/individual_items/BrownEggs_item.png',
       weight: 1,
       originalPrice: 9,
+      weightCategory:4,
       category: 'Groceries',
 
     ),
@@ -157,6 +173,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 500,
       originalPrice: 55,
       category: 'Fruit',
+      weightCategory: 1 ,
       discountedAmount: 40,
     ),
     IndividualItem(
@@ -166,6 +183,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 50,
       originalPrice: 20,
       category: 'Groceries',
+      weightCategory: 0,
       discountedAmount: 18,
     ),
     IndividualItem(
@@ -175,15 +193,17 @@ class ShoppingItems with ChangeNotifier {
       weight: 500,
       originalPrice: 500,
       category: 'Groceries',
+      weightCategory: 1,
       discountedAmount: 475,
     ),
     IndividualItem(
       productId: 18,
       productName: 'Taco Shells',
       imageUrl: 'assets/images/individual_items/TacoShells_item.jpg',
-      weight: 50,
+      weight: 10,
       originalPrice: 55,
       category: 'Groceries',
+      weightCategory:4,
       discountedAmount: 40,
     ),
     IndividualItem(
@@ -193,6 +213,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 50,
       originalPrice: 55,
       category: 'Groceries',
+      weightCategory: 0,
       discountedAmount: 40,
     ),
     IndividualItem(
@@ -201,6 +222,7 @@ class ShoppingItems with ChangeNotifier {
       imageUrl: 'assets/images/individual_items/Colgate_item.jpg',
       weight: 100,
       originalPrice: 45,
+      weightCategory: 0,
       category: 'Groceries',
     ),
     IndividualItem(
@@ -209,6 +231,7 @@ class ShoppingItems with ChangeNotifier {
       imageUrl: 'assets/images/individual_items/ColgateMaxFresh_item.png',
       weight: 100,
       originalPrice: 50,
+      weightCategory:0,
       category: 'Groceries',
 
     ),
@@ -219,6 +242,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 50,
       originalPrice: 55,
       category: 'Groceries',
+      weightCategory:0,
       discountedAmount: 40,
     ),
     IndividualItem(
@@ -228,6 +252,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 100,
       originalPrice: 70,
       category: 'Groceries',
+      weightCategory:0,
     ),
     IndividualItem(
       productId: 24,
@@ -236,6 +261,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 50,
       originalPrice: 55,
       category: 'Groceries',
+      weightCategory:4,
       discountedAmount: 40,
     ),
     IndividualItem(
@@ -245,6 +271,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 500,
       originalPrice: 40,
       category: 'Dairy Products',
+      weightCategory: 3 ,
       discountedAmount: 40,
     ),
 
@@ -255,6 +282,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 250,
       originalPrice: 210,
       category: 'DairyProducts',
+      weightCategory: 2,
       discountedAmount: 230,
     ),
     IndividualItem(
@@ -264,6 +292,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 50,
       originalPrice: 55,
       category: 'DiaryProducts',
+      weightCategory:0,
       discountedAmount: 40,
     ),
     IndividualItem(
@@ -273,6 +302,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 500,
       originalPrice: 150,
       category: 'Groceries',
+      weightCategory:1,
       discountedAmount: 130,
     ),
   ];

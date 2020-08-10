@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import'package:grocery_app/providers/single_item_provider.dart';
+
+
 class FreshArrivals extends StatelessWidget {
   final List freshArrivals;
 
@@ -7,6 +12,7 @@ class FreshArrivals extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin:EdgeInsets.only(top:15,),
       height: MediaQuery.of(context).size.height * 0.55,
       width: MediaQuery.of(context).size.width,
       child: LayoutBuilder(
@@ -200,13 +206,14 @@ class FreshArrivals extends StatelessWidget {
                                           child: Text(
                                             '${freshArrivals[index].productName}',
                                             style: TextStyle(
-                                              color: Colors.black,
+                                              color: Colors.black54
+                                              ,
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         )),
-                                    FittedBox(child: Text( '${freshArrivals[index].weight}',style: TextStyle(color: Colors.black,fontSize: 10,),)),
+                                    Consumer<ShoppingItems>(builder:(_,providerPath,child)=> FittedBox(child: Text( '${freshArrivals[index].weight} ${providerPath.weightUnit[freshArrivals[index].weightCategory]}',style: TextStyle(color: Colors.black,fontSize: 10,),))),
                                     SizedBox(
                                       height: 5,
                                     ),
@@ -220,12 +227,16 @@ class FreshArrivals extends StatelessWidget {
                                               color: Colors.black54,
                                             )),
                                         Text(
-                                            'Rs ${freshArrivals[index].originalPrice}',
+                                            '${freshArrivals[index].originalPrice}',
                                             style: TextStyle(
                                                 decoration:
                                                 TextDecoration.lineThrough,
                                                 fontSize: 10,
                                                 color: Colors.grey)),
+                                        Container(
+                                            margin:EdgeInsets.only(left: 20),
+                                            child:Icon(Icons.favorite_border,size:20,color: Theme.of(context).accentColor,)
+                                        ),
                                       ],
                                     ),
                                   ],

@@ -1,4 +1,6 @@
 import'package:flutter/material.dart';
+import'package:grocery_app/providers/single_item_provider.dart';
+import 'package:provider/provider.dart';
 class FeatureWidget extends StatelessWidget {
   final String title;
   final List<dynamic> products;
@@ -132,13 +134,15 @@ class FeatureWidget extends StatelessWidget {
 
                       
                       Container(margin:EdgeInsets.only(left: 10),alignment:Alignment.topLeft,child: FittedBox(child: Text('${products[0].productName}',style: TextStyle(color:Colors.black54,fontWeight: FontWeight.bold,fontSize: 20),)),),
-                      Container(margin:EdgeInsets.only(left: 10),alignment:Alignment.topLeft,child:FittedBox(child: Text('${products[0].weight}',style: TextStyle(color:Colors.black54,fontSize: 10),)),),
+                      Consumer<ShoppingItems>(builder: (context,providerPath,child)=> Container(margin:EdgeInsets.only(left: 10),alignment:Alignment.topLeft,child:FittedBox(child: Text('${products[0].weight} ${providerPath.weightUnit[products[0].weightCategory]}',style: TextStyle(color:Colors.black54,fontSize: 10),)),)),
                       SizedBox(height: 10,),
                       Container(
+                        height: constraints.maxHeight*0.07,
                         margin:EdgeInsets.only(left: 10),
 
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
+
 
                           children: <Widget>[
                             Text(
@@ -152,13 +156,23 @@ class FeatureWidget extends StatelessWidget {
                                 fontSize: 18,
                               ),
                             ),
-                            Text(
-                              '${products[0].originalPrice}',
-                              style: TextStyle(
-                                color: Colors.grey,
-                                decoration: TextDecoration.lineThrough,
+                            Align(
+                              alignment:Alignment.bottomRight,
+                              child: Text(
+                                '${products[0].originalPrice}',
+                                style: TextStyle(
+                                  fontSize:11,
+                                  color: Colors.grey,
+                                  decoration: TextDecoration.lineThrough,
+                                ),
                               ),
                             ),
+                            Spacer(),
+                            Container(
+                              margin:EdgeInsets.only(right: 13),
+                              child:Icon(Icons.favorite_border,size:20,color: Theme.of(context).accentColor,)
+                            ),
+
                           ],
                         ),
                       )
@@ -200,7 +214,7 @@ class FeatureWidget extends StatelessWidget {
                                   )),
                             ),
                             Container(margin: EdgeInsets.only(left: 14),child: Text('${products[1].productName}',style: TextStyle(fontSize: 13,color: Colors.black54,fontWeight: FontWeight.bold),),),
-                            Container(margin: EdgeInsets.only(left: 14),child: Text('${products[1].weight}',style: TextStyle(fontSize: 8,color: Colors.grey,),),),
+                            Consumer<ShoppingItems>(builder:(context,providerPath,child)=> Container(margin: EdgeInsets.only(left: 14),child: Text('${products[1].weight} ${providerPath.weightUnit[products[0].weightCategory]}',style: TextStyle(fontSize: 8,color: Colors.grey,),),)),
                            Spacer(),
                             Container(
                               margin: EdgeInsets.only(left: 14),
@@ -221,10 +235,15 @@ class FeatureWidget extends StatelessWidget {
                                   Text(
                                     '${products[1].originalPrice}',
                                     style: TextStyle(
-                                      fontSize: 9,
+                                      fontSize: 10,
                                       color:Colors.grey,
                                       decoration: TextDecoration.lineThrough,
                                     ),
+                                  ),
+                                  Spacer(),
+                                  Container(
+                                      margin:EdgeInsets.only(right: 14),
+                                      child:Icon(Icons.favorite_border,size:20,color: Theme.of(context).accentColor,)
                                   ),
                                 ],
                               ),
@@ -250,7 +269,7 @@ class FeatureWidget extends StatelessWidget {
                                   )),
                             ),
                             Container(margin: EdgeInsets.only(left: 14),child: Text('${products[2].productName}',style: TextStyle(fontSize: 13,color: Colors.black54,fontWeight: FontWeight.bold),),),
-                            Container(margin: EdgeInsets.only(left: 14),child: Text('${products[2].weight}',style: TextStyle(fontSize: 8,color: Colors.grey,),),),
+                            Consumer<ShoppingItems>(builder:(_,providerPath,child)=> Container(margin: EdgeInsets.only(left: 14),child: Text('${products[2].weight} ${providerPath.weightUnit[products[0].weightCategory]}',style: TextStyle(fontSize: 8,color: Colors.grey,),),)),
                             Spacer(),
                             Container(
                               margin: EdgeInsets.only(left: 14),
@@ -271,10 +290,16 @@ class FeatureWidget extends StatelessWidget {
                                   Text(
                                     '${products[2].originalPrice}',
                                     style: TextStyle(
+                                      fontSize:10,
                                       color:Colors.grey,
                                       decoration: TextDecoration.lineThrough,
 
                                     ),
+                                  ),
+                                  Spacer(),
+                                  Container(
+                                      margin:EdgeInsets.only(right: 14),
+                                      child:Icon(Icons.favorite_border,size:20,color: Theme.of(context).accentColor,)
                                   ),
                                 ],
                               ),

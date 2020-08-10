@@ -3,13 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import './screens/home.dart';
+
 import './providers/location_provider.dart';
-import 'providers/image_provider.dart';
-import 'providers/single_item_provider.dart';
+import './providers/image_provider.dart';
+import './providers/single_item_provider.dart';
+import 'package:grocery_app/providers/bottom_tab_bar_provider.dart';
+
+
+
 
 void main() => runApp(MultiProvider(providers: [
-      ChangeNotifierProvider(create: (context) => Location()),
+      ChangeNotifierProvider(create: (context) => Location(),),
+      ChangeNotifierProvider(create: (context) => BottomTabBar(),),
+        ChangeNotifierProvider(
+          create: (context) => ProvidesImages(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ShoppingItems(),
+      ),
     ], child: GroceryApp()));
 
 class GroceryApp extends StatefulWidget {
@@ -18,10 +29,14 @@ class GroceryApp extends StatefulWidget {
 }
 
 class _GroceryAppState extends State<GroceryApp> {
+
+  int currentIndex = 0;
+
   String shopName = 'Balaji\'s market';
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       theme: ThemeData(
           textTheme: GoogleFonts.exo2TextTheme(Theme.of(context).textTheme),
@@ -30,8 +45,8 @@ class _GroceryAppState extends State<GroceryApp> {
           backgroundColor: Colors.white),
       title: 'Grocery App',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
+      home: Consumer<BottomTabBar>(
+        child: AppBar(
           backgroundColor: Colors.white,
           leading: Container(
             margin: EdgeInsets.only(top: 10, bottom: 10, left: 15),
@@ -75,23 +90,23 @@ class _GroceryAppState extends State<GroceryApp> {
                 child: Consumer<Location>(
                   builder: (context, location, child) =>
                       DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      value: location.defaultBranch,
-                      items: location.storeBranches.map(
-                        (branch) {
-                          return DropdownMenuItem<String>(
-                            value: branch,
-                            child: Text(
-                              '$branch',
-                              style: TextStyle(fontSize: 15),
-                            ),
-                          );
-                        },
-                      ).toList(),
-                      onChanged: (branch) => Provider.of<Location>(context)
-                          .branchSelection(branch),
-                    ),
-                  ),
+                        child: DropdownButton<String>(
+                          value: location.defaultBranch,
+                          items: location.storeBranches.map(
+                                (branch) {
+                              return DropdownMenuItem<String>(
+                                value: branch,
+                                child: Text(
+                                  '$branch',
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                              );
+                            },
+                          ).toList(),
+                          onChanged: (branch) => Provider.of<Location>(context)
+                              .branchSelection(branch),
+                        ),
+                      ),
                 ),
               ),
             ],
@@ -123,9 +138,9 @@ class _GroceryAppState extends State<GroceryApp> {
                       backgroundColor: Colors.redAccent.withOpacity(0.4),
                       child: Center(
                           child: Icon(
-                        Icons.favorite_border,
-                        color: Colors.redAccent,
-                      )),
+                            Icons.favorite_border,
+                            color: Colors.redAccent,
+                          )),
                     ),
                   ),
                   Positioned(
@@ -179,27 +194,27 @@ class _GroceryAppState extends State<GroceryApp> {
                     .myProfileDropdown
                     .map(
                       (item) => PopupMenuItem<String>(
-                        value: item['title'].toString(),
-                        child: Row(
-                          children: <Widget>[
-                            Container(
-                              child: item['icon'],
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              child: Text(
-                                item['title'],
-                                style: TextStyle(
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ),
-                          ],
+                    value: item['title'].toString(),
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          child: item['icon'],
                         ),
-                      ),
-                    )
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          child: Text(
+                            item['title'],
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
                     .toList();
               },
               onSelected: (value) {
@@ -245,12 +260,12 @@ class _GroceryAppState extends State<GroceryApp> {
                     children: [
                       Container(
                           child: IconButton(
-                        onPressed: null,
-                        icon: Icon(
-                          Icons.widgets,
-                          color: Colors.black54,
-                        ),
-                      )),
+                            onPressed: null,
+                            icon: Icon(
+                              Icons.widgets,
+                              color: Colors.black54,
+                            ),
+                          )),
                       Container(
                         child: Row(
                           children: [
@@ -309,32 +324,102 @@ class _GroceryAppState extends State<GroceryApp> {
             ),
           ),
         ),
-        body: MultiProvider(providers: [
-          ChangeNotifierProvider(
-            create: (context) => ProvidesImages(),
+        builder: (context,providerPath,appBarWidget)=> Scaffold(
+          appBar:appBarWidget,
+          body: providerPath.navigatingPages[providerPath.body],
+          bottomNavigationBar: BubbleBottomBar(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(15), topLeft: Radius.circular(15)),
+            elevation: 20,
+            backgroundColor: Colors.deepOrange.withOpacity(0.75),
+            opacity: 0.99,
+            iconSize: 25,
+            currentIndex:providerPath.body,
+            hasNotch: false,
+            hasInk: false,
+            onTap:(index)=> providerPath.switchingPages(index),
+            items: <BubbleBottomBarItem>[
+              BubbleBottomBarItem(
+                  backgroundColor:Colors. white,
+                  title: Text('Files',
+                      style: TextStyle(
+                        color:Colors.deepOrange.withOpacity(0.8),
+                      )),
+                  icon: Icon(
+                    Icons.style,
+                    color: Colors.black54,
+                  ),
+                  activeIcon: Icon(
+                    Icons.style,
+                    size: 25,
+                    color: Colors.deepOrange.withOpacity(0.8),
+                  )),
+              BubbleBottomBarItem(
+                  backgroundColor: Colors.white,
+                  title: Text('Offers',
+                      style: TextStyle(
+                        color:Colors.deepOrange.withOpacity(0.8),
+                      )),
+                  icon: Icon(
+                    Icons.monetization_on,
+                    color: Colors.black54,
+                  ),
+                  activeIcon: Icon(
+                    Icons.monetization_on,
+                    size: 25,
+                    color: Colors.deepOrange.withOpacity(0.8),
+                  )),
+              BubbleBottomBarItem(
+                  backgroundColor:Colors. white,
+                  title: Text('Home',
+                      style: TextStyle(
+                        color:Colors.deepOrange,
+                      )),
+                  icon: Icon(
+                    Icons.home,
+                    color: Colors.black54,
+                  ),
+                  activeIcon: Icon(
+                    Icons.home,
+                    size: 25,
+                    color: Colors.deepOrange,
+                  )),
+              BubbleBottomBarItem(
+                  backgroundColor: Colors.deepOrange.withOpacity(0.8),
+                  title: Text('Delivery',
+
+                      style: TextStyle(
+                        color:Colors.deepOrange.withOpacity(0.8),
+                      )),
+                  icon: Icon(
+                    Icons.local_shipping,
+                    color: Colors.black54,
+                  ),
+                  activeIcon: Icon(
+                    Icons.local_shipping,
+                    size: 25,
+
+                    color: Colors.deepOrange.withOpacity(0.8),
+                  )),
+              BubbleBottomBarItem(
+                  backgroundColor: Colors.white,
+                  title: Text('Profile',
+                      style: TextStyle(
+                        color:Colors.deepOrange.withOpacity(0.8),
+                      )),
+                  icon: Icon(
+                    Icons.person_outline,
+                    color: Colors.black54,
+                  ),
+                  activeIcon: Icon(
+                    Icons.person_outline,
+                    size: 25,
+                    color: Colors.deepOrange.withOpacity(0.8),
+                  )),
+            ],
           ),
-          ChangeNotifierProvider(
-            create: (context) => ShoppingItems(),
-          ),
-        ], child: HomeScreen()),
-        bottomNavigationBar: BubbleBottomBar(
-          opacity: null,
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(8), topLeft: Radius.circular(8)),
-           elevation: 8,
-           backgroundColor: Colors.white,
-           iconSize: 15,
-           currentIndex: 0,
-           hasInk: true,
-           inkColor: Theme.of(context).primaryColor,
-           //onTap: ,
-                     items: [
-                       BubbleBottomBarItem(title:Text('Home'),icon:Icon(Icons.home,color: Colors.black,),activeIcon: Icon(Icons.home,color:Theme.of(context).primaryColor,) ),
-                       BubbleBottomBarItem(title:Text('Home'),icon:Icon(Icons.home,color: Colors.black,),activeIcon: Icon(Icons.home,color:Theme.of(context).primaryColor,) ),
-    BubbleBottomBarItem(title:Text('Home'),icon:Icon(Icons.home,color: Colors.black,),activeIcon: Icon(Icons.home,color:Theme.of(context).primaryColor,) ),
-    BubbleBottomBarItem(title:Text('Home'),icon:Icon(Icons.home,color: Colors.black,),activeIcon: Icon(Icons.home,color:Theme.of(context).primaryColor,) ),
-                     ],
         ),
+
       ),
     );
   }
