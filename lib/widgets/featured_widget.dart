@@ -1,9 +1,11 @@
 import'package:flutter/material.dart';
 import'package:grocery_app/providers/single_item_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:grocery_app/widgets/products_grid.dart';
+
 class FeatureWidget extends StatelessWidget {
   final String title;
-  final List<dynamic> products;
+  final List<IndividualItem> products;
 
   FeatureWidget({this.products, this.title});
 
@@ -46,7 +48,9 @@ class FeatureWidget extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
+            InkWell(
+                onTap: ()=>Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductsGrid(title: '$title',products: [...products],),)),
+                child:Container(
                 padding: EdgeInsets.all(10),
                 margin: EdgeInsets.only(top: 20, right: 13),
                 decoration: BoxDecoration(
@@ -78,7 +82,7 @@ class FeatureWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: InkWell(
+
                   child: Text(
                     'View all >>',
                     style: TextStyle(
@@ -242,9 +246,10 @@ class FeatureWidget extends StatelessWidget {
                                   ),
                                   Spacer(),
                                   Container(
-                                      margin:EdgeInsets.only(right: 14),
-                                      child:Icon(Icons.favorite_border,size:20,color: Theme.of(context).accentColor,)
-                                  ),
+                                        margin:EdgeInsets.only(right: 14),
+                                        child:Icon(Icons.favorite_border,size:20,color: Theme.of(context).accentColor,),
+                                    ),
+
                                 ],
                               ),
                             )

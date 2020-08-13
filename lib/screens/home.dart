@@ -20,10 +20,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
     final featuredProducts = [
-      ...Provider.of<ShoppingItems>(context,listen: false).getDiscountedData
+      ...Provider.of<ShoppingItems>(context,listen: false).featuredProducts
     ];
-    final bestValues=(featuredProducts.toList()..shuffle());
-    final freshArrivals = (featuredProducts.toList()..shuffle());
+    final bestValues=[
+      ...Provider.of<ShoppingItems>(context,listen: false).bestValues
+    ];
+    final freshArrivals = [
+      ...Provider.of<ShoppingItems>(context,listen: false).freshArrivals
+    ];
     final carouselImages = Provider.of<ProvidesImages>(
       context,listen: false,
     ).carouselImages;
@@ -254,7 +258,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 10,
             ),
             FeatureWidget(
-              title: 'FeaturedProducts',
+              title: 'Featured Products',
               products: featuredProducts,
             ),
             FreshArrivals(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/widgets/products_grid.dart';
 import 'package:provider/provider.dart';
 
-import'package:grocery_app/providers/single_item_provider.dart';
-
+import 'package:grocery_app/providers/single_item_provider.dart';
 
 class FreshArrivals extends StatelessWidget {
   final List freshArrivals;
@@ -12,7 +12,9 @@ class FreshArrivals extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin:EdgeInsets.only(top:15,),
+      margin: EdgeInsets.only(
+        top: 15,
+      ),
       height: MediaQuery.of(context).size.height * 0.55,
       width: MediaQuery.of(context).size.width,
       child: LayoutBuilder(
@@ -33,7 +35,7 @@ class FreshArrivals extends StatelessWidget {
                       children: <Widget>[
                         Padding(
                           padding:
-                          EdgeInsets.only(left: 10, top: 17, bottom: 2),
+                              EdgeInsets.only(left: 10, top: 17, bottom: 2),
                           child: Text(
                             'You may also like',
                             style: TextStyle(
@@ -91,6 +93,7 @@ class FreshArrivals extends StatelessWidget {
                         ],
                       ),
                       child: InkWell(
+                        onTap: ()=>Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductsGrid(title: 'Fresh Arrivals',products: [...freshArrivals],))),
                         child: Text(
                           'View all >>',
                           style: TextStyle(
@@ -131,7 +134,7 @@ class FreshArrivals extends StatelessWidget {
                         color: Colors.white,
                         border: Border.all(
                           color:
-                          Theme.of(context).primaryColor.withOpacity(0.7),
+                              Theme.of(context).primaryColor.withOpacity(0.7),
                         ),
                         borderRadius: BorderRadius.all(
                           Radius.circular(9),
@@ -180,17 +183,18 @@ class FreshArrivals extends StatelessWidget {
                                 ),
                               ),
                               child: ClipRRect(
-                                borderRadius:BorderRadius.all(
-                                Radius.circular(5),
-                                 ),
-                                child: Image.asset(freshArrivals[index].imageUrl,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5),
+                                ),
+                                child: Image.asset(
+                                    freshArrivals[index].imageUrl,
                                     fit: BoxFit.cover),
                               ),
                             ),
                           ),
                           Positioned(
                               bottom: 10,
-                              left: 30,
+                              left: 28,
                               child: Container(
                                 alignment: Alignment.topRight,
                                 width: constraints.maxWidth,
@@ -202,18 +206,26 @@ class FreshArrivals extends StatelessWidget {
                                   children: <Widget>[
                                     FittedBox(
                                         child: Container(
-                                          width:130,
-                                          child: Text(
-                                            '${freshArrivals[index].productName}',
-                                            style: TextStyle(
-                                              color: Colors.black54
-                                              ,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        )),
-                                    Consumer<ShoppingItems>(builder:(_,providerPath,child)=> FittedBox(child: Text( '${freshArrivals[index].weight} ${providerPath.weightUnit[freshArrivals[index].weightCategory]}',style: TextStyle(color: Colors.black,fontSize: 10,),))),
+                                      width: 130,
+                                      child: Text(
+                                        '${freshArrivals[index].productName}',
+                                        style: TextStyle(
+                                          color: Colors.black54,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    )),
+                                    Consumer<ShoppingItems>(
+                                        builder: (_, providerPath, child) =>
+                                            FittedBox(
+                                                child: Text(
+                                              '${freshArrivals[index].weight} ${providerPath.weightUnit[freshArrivals[index].weightCategory]}',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 10,
+                                              ),
+                                            ))),
                                     SizedBox(
                                       height: 5,
                                     ),
@@ -230,13 +242,75 @@ class FreshArrivals extends StatelessWidget {
                                             '${freshArrivals[index].originalPrice}',
                                             style: TextStyle(
                                                 decoration:
-                                                TextDecoration.lineThrough,
+                                                    TextDecoration.lineThrough,
                                                 fontSize: 10,
                                                 color: Colors.grey)),
-                                        Container(
-                                            margin:EdgeInsets.only(left: 20),
-                                            child:Icon(Icons.favorite_border,size:20,color: Theme.of(context).accentColor,)
-                                        ),
+
+
+
+//                                        Consumer<ShoppingItems>(
+//                                          builder:(context, providerPath, child) =>
+//                                                  Consumer<FavouritesList>(
+//                                                        builder: (context, favouritePath, child) => Container(
+//                                                            margin: EdgeInsets.only(left: 20),
+//                                                              child: freshArrivals[index] .isFavourite ? IconButton(
+//                                                       icon: Icon(
+//                                                        Icons.favorite,
+//                                                        size: 20,
+//                                                        color: Theme.of(context)
+//                                                            .accentColor,
+//                                                      ),
+//                                                      onPressed: () {
+//                                                         print('pressed');
+//                                                        providerPath
+//                                                            .changeFavourites(
+//
+//                                                                freshArrivals[
+//                                                                        index]
+//                                                                    .productId);
+//                                                        favouritePath
+//                                                            .removeFavouriteItem(
+//                                                                freshArrivals[
+//                                                                        index]
+//                                                                    .productId);
+//                                                      },
+//                                                    )
+//                                                  : IconButton(
+//
+//                                                      icon: Icon(
+//                                                        Icons.favorite_border,
+//                                                        size: 20,
+//                                                        color: Theme.of(context)
+//                                                            .accentColor,
+//                                                      ),
+//                                                      onPressed: () {
+//                                                        print('pressed');
+//                                                        providerPath
+//                                                            .changeFavourites(
+//                                                                freshArrivals[
+//                                                                        index]
+//                                                                    .productId);
+//                                                        favouritePath
+//                                                            .addFavouriteItem(
+//                                                                freshArrivals[
+//                                                                        index]
+//                                                                    .productId,
+//                                                                freshArrivals[
+//                                                                        index]
+//                                                                    .imageUrl,
+//                                                                freshArrivals[
+//                                                                        index]
+//                                                                    .productName,
+//                                                                freshArrivals[
+//                                                                        index]
+//                                                                    .weight,
+//                                                                freshArrivals[
+//                                                                        index]
+//                                                                    .discountedAmount);
+//                                                      }),
+//                                            ),
+//                                          ),
+//                                        ),
                                       ],
                                     ),
                                   ],

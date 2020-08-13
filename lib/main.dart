@@ -1,12 +1,14 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 
 import './providers/location_provider.dart';
 import './providers/image_provider.dart';
 import './providers/single_item_provider.dart';
+import './providers/Favourites_provider.dart';
 import 'package:grocery_app/providers/bottom_tab_bar_provider.dart';
 
 
@@ -20,6 +22,9 @@ void main() => runApp(MultiProvider(providers: [
         ),
         ChangeNotifierProvider(
           create: (context) => ShoppingItems(),
+       ),
+      ChangeNotifierProvider(
+        create: (context) => FavouritesList(),
       ),
     ], child: GroceryApp()));
 

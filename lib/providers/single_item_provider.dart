@@ -16,6 +16,7 @@ class IndividualItem {
   @required
   List<int> availableWeights;
   double discountedAmount;
+  bool isFavourite;
 
   IndividualItem({this.productId,
     this.productName,
@@ -24,13 +25,14 @@ class IndividualItem {
     this.originalPrice,
     this.weightCategory,
     this.weight,
+    this.isFavourite=false,
     this.availableWeights,
     this.discountedAmount});
 }
 
 class ShoppingItems with ChangeNotifier {
   List<String> weightUnit=['g','kg','ml','l','nos'];
-  List<IndividualItem> itemsList = [
+ static  List<IndividualItem> itemsList = [
     IndividualItem(
         productId: 01,
         productName: 'Tomato',
@@ -307,10 +309,22 @@ class ShoppingItems with ChangeNotifier {
     ),
   ];
 
+  final List<IndividualItem> featuredProducts=[...ShoppingItems.getDiscountedData];
+  final bestValues=[...ShoppingItems.getDiscountedData.toList()..shuffle()];
+  final freshArrivals = [...ShoppingItems.getDiscountedData.toList()..shuffle()];
 
 
+  void changeFavourites(int id){
+    IndividualItem prod =itemsList.firstWhere((element) =>(element.productId==id) );
+    prod.isFavourite?prod.isFavourite=false:prod.isFavourite=true;
+    print('${prod.isFavourite}');
+    ChangeNotifier();
 
-  List<IndividualItem> get getDiscountedData{
+  }
+  IndividualItem findById(int id){
+    return itemsList.firstWhere((element) => element.productId==id);
+  }
+   static List<IndividualItem> get getDiscountedData{
     return [...itemsList.where((element) => element.discountedAmount !=null,),];
   }
 }
