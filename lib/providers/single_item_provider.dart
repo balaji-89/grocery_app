@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class IndividualItem {
-  @required int productId;
+  @required
+  int productId;
   @required
   String productName;
   @required
@@ -12,27 +13,29 @@ class IndividualItem {
   double originalPrice;
   @required
   int weight;
-  @required int weightCategory;
+  @required
+  int weightCategory;
   @required
   List<int> availableWeights;
   double discountedAmount;
   bool isFavourite;
 
-  IndividualItem({this.productId,
-    this.productName,
-    this.imageUrl,
-    this.category,
-    this.originalPrice,
-    this.weightCategory,
-    this.weight,
-    this.isFavourite=false,
-    this.availableWeights,
-    this.discountedAmount});
+  IndividualItem(
+      {this.productId,
+      this.productName,
+      this.imageUrl,
+      this.category,
+      this.originalPrice,
+      this.weightCategory,
+      this.weight,
+      this.isFavourite = false,
+      this.availableWeights,
+      this.discountedAmount});
 }
 
 class ShoppingItems with ChangeNotifier {
-  List<String> weightUnit=['g','kg','ml','l','nos'];
- static  List<IndividualItem> itemsList = [
+  List<String> weightUnit = ['g', 'kg', 'ml', 'l', 'nos'];
+  static List<IndividualItem> itemsList = [
     IndividualItem(
         productId: 01,
         productName: 'Tomato',
@@ -40,7 +43,7 @@ class ShoppingItems with ChangeNotifier {
         weight: 500,
         originalPrice: 74,
         category: 'Vegetables',
-        weightCategory: 1 ,
+        weightCategory: 1,
         discountedAmount: 40),
     IndividualItem(
       productId: 02,
@@ -48,7 +51,7 @@ class ShoppingItems with ChangeNotifier {
       imageUrl: 'assets/images/individual_items/Onion_item.jpg',
       weight: 500,
       originalPrice: 50,
-      weightCategory: 1 ,
+      weightCategory: 1,
       category: 'Vegetables',
     ),
     IndividualItem(
@@ -58,7 +61,7 @@ class ShoppingItems with ChangeNotifier {
         weight: 500,
         originalPrice: 50,
         category: 'Vegetables',
-        weightCategory: 1 ,
+        weightCategory: 1,
         discountedAmount: 40),
     IndividualItem(
         productId: 04,
@@ -67,7 +70,7 @@ class ShoppingItems with ChangeNotifier {
         weight: 500,
         originalPrice: 30,
         category: 'Vegetables',
-        weightCategory: 1 ,
+        weightCategory: 1,
         discountedAmount: 25),
     IndividualItem(
         productId: 05,
@@ -76,7 +79,7 @@ class ShoppingItems with ChangeNotifier {
         weight: 500,
         originalPrice: 74,
         category: 'Fruits',
-        weightCategory: 1 ,
+        weightCategory: 1,
         discountedAmount: 60),
     IndividualItem(
         productId: 06,
@@ -85,7 +88,7 @@ class ShoppingItems with ChangeNotifier {
         weight: 500,
         originalPrice: 75,
         category: 'Fruits',
-        weightCategory: 1 ,
+        weightCategory: 1,
         discountedAmount: 70),
     IndividualItem(
       productId: 07,
@@ -94,7 +97,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 500,
       originalPrice: 75,
       category: 'Fruits',
-      weightCategory: 1 ,
+      weightCategory: 1,
     ),
     IndividualItem(
       productId: 08,
@@ -103,7 +106,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 500,
       originalPrice: 55,
       category: 'Fruits',
-      weightCategory: 1 ,
+      weightCategory: 1,
       discountedAmount: 40,
     ),
     IndividualItem(
@@ -112,20 +115,17 @@ class ShoppingItems with ChangeNotifier {
       imageUrl: 'assets/images/individual_items/AppleJuice_item.png',
       weight: 100,
       originalPrice: 30,
-      weightCategory: 2 ,
+      weightCategory: 2,
       category: 'Beverages',
-
     ),
-
     IndividualItem(
       productId: 10,
       productName: 'Pineapple Juice',
       imageUrl: 'assets/images/individual_items/PineappleJuice_item.png',
       weight: 100,
       originalPrice: 30,
-      weightCategory: 2 ,
+      weightCategory: 2,
       category: 'Beverages',
-
     ),
     IndividualItem(
       productId: 11,
@@ -134,7 +134,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 100,
       originalPrice: 30,
       category: 'Beverages',
-      weightCategory: 2 ,
+      weightCategory: 2,
       discountedAmount: 20,
     ),
     IndividualItem(
@@ -143,9 +143,8 @@ class ShoppingItems with ChangeNotifier {
       imageUrl: 'assets/images/individual_items/Mango_item.jpg',
       weight: 100,
       originalPrice: 50,
-      weightCategory: 2 ,
+      weightCategory: 2,
       category: 'Beverages',
-
     ),
     IndividualItem(
       productId: 13,
@@ -155,7 +154,6 @@ class ShoppingItems with ChangeNotifier {
       originalPrice: 5,
       weightCategory: 4,
       category: 'Groceries',
-
     ),
     IndividualItem(
       productId: 14,
@@ -163,11 +161,9 @@ class ShoppingItems with ChangeNotifier {
       imageUrl: 'assets/images/individual_items/BrownEggs_item.png',
       weight: 1,
       originalPrice: 9,
-      weightCategory:4,
+      weightCategory: 4,
       category: 'Groceries',
-
     ),
-
     IndividualItem(
       productId: 15,
       productName: 'Basmathi Rice',
@@ -175,7 +171,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 500,
       originalPrice: 55,
       category: 'Fruit',
-      weightCategory: 1 ,
+      weightCategory: 1,
       discountedAmount: 40,
     ),
     IndividualItem(
@@ -205,7 +201,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 10,
       originalPrice: 55,
       category: 'Groceries',
-      weightCategory:4,
+      weightCategory: 4,
       discountedAmount: 40,
     ),
     IndividualItem(
@@ -233,9 +229,8 @@ class ShoppingItems with ChangeNotifier {
       imageUrl: 'assets/images/individual_items/ColgateMaxFresh_item.png',
       weight: 100,
       originalPrice: 50,
-      weightCategory:0,
+      weightCategory: 0,
       category: 'Groceries',
-
     ),
     IndividualItem(
       productId: 22,
@@ -244,7 +239,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 50,
       originalPrice: 55,
       category: 'Groceries',
-      weightCategory:0,
+      weightCategory: 0,
       discountedAmount: 40,
     ),
     IndividualItem(
@@ -254,7 +249,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 100,
       originalPrice: 70,
       category: 'Groceries',
-      weightCategory:0,
+      weightCategory: 0,
     ),
     IndividualItem(
       productId: 24,
@@ -263,7 +258,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 50,
       originalPrice: 55,
       category: 'Groceries',
-      weightCategory:4,
+      weightCategory: 4,
       discountedAmount: 40,
     ),
     IndividualItem(
@@ -273,10 +268,9 @@ class ShoppingItems with ChangeNotifier {
       weight: 500,
       originalPrice: 40,
       category: 'Dairy Products',
-      weightCategory: 3 ,
+      weightCategory: 3,
       discountedAmount: 40,
     ),
-
     IndividualItem(
       productId: 26,
       productName: 'IceCream',
@@ -294,7 +288,7 @@ class ShoppingItems with ChangeNotifier {
       weight: 50,
       originalPrice: 55,
       category: 'DiaryProducts',
-      weightCategory:0,
+      weightCategory: 0,
       discountedAmount: 40,
     ),
     IndividualItem(
@@ -304,27 +298,36 @@ class ShoppingItems with ChangeNotifier {
       weight: 500,
       originalPrice: 150,
       category: 'Groceries',
-      weightCategory:1,
+      weightCategory: 1,
       discountedAmount: 130,
     ),
   ];
 
-  final List<IndividualItem> featuredProducts=[...ShoppingItems.getDiscountedData];
-  final bestValues=[...ShoppingItems.getDiscountedData.toList()..shuffle()];
-  final freshArrivals = [...ShoppingItems.getDiscountedData.toList()..shuffle()];
+  final List<IndividualItem> featuredProducts = [
+    ...ShoppingItems.getDiscountedData
+  ];
+  final bestValues = [...ShoppingItems.getDiscountedData.toList()..shuffle()];
+  final freshArrivals = [
+    ...ShoppingItems.getDiscountedData.toList()..shuffle()
+  ];
 
-
-  void changeFavourites(int id){
-    IndividualItem prod =itemsList.firstWhere((element) =>(element.productId==id) );
-    prod.isFavourite?prod.isFavourite=false:prod.isFavourite=true;
-    print('${prod.isFavourite}');
+  void changeFavourites(int id) {
+    IndividualItem prod =
+        itemsList.firstWhere((element) => (element.productId == id));
+    prod.isFavourite = !prod.isFavourite;
+    print('Item provider: ${prod.isFavourite}');
     ChangeNotifier();
+  }
 
+  IndividualItem findById(int id) {
+    return itemsList.firstWhere((element) => element.productId == id);
   }
-  IndividualItem findById(int id){
-    return itemsList.firstWhere((element) => element.productId==id);
-  }
-   static List<IndividualItem> get getDiscountedData{
-    return [...itemsList.where((element) => element.discountedAmount !=null,),];
+
+  static List<IndividualItem> get getDiscountedData {
+    return [
+      ...itemsList.where(
+        (element) => element.discountedAmount != null,
+      ),
+    ];
   }
 }

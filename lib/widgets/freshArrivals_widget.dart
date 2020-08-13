@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 
 import 'package:grocery_app/providers/single_item_provider.dart';
 
+import '../providers/Favourites_provider.dart';
+
 class FreshArrivals extends StatelessWidget {
   final List freshArrivals;
 
@@ -93,7 +95,12 @@ class FreshArrivals extends StatelessWidget {
                         ],
                       ),
                       child: InkWell(
-                        onTap: ()=>Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductsGrid(title: 'Fresh Arrivals',products: [...freshArrivals],))),
+                        onTap: () =>
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => ProductsGrid(
+                                      title: 'Fresh Arrivals',
+                                      products: [...freshArrivals],
+                                    ))),
                         child: Text(
                           'View all >>',
                           style: TextStyle(
@@ -205,27 +212,30 @@ class FreshArrivals extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     FittedBox(
-                                        child: Container(
-                                      width: 130,
-                                      child: Text(
-                                        '${freshArrivals[index].productName}',
-                                        style: TextStyle(
-                                          color: Colors.black54,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
+                                      child: Container(
+                                        width: 130,
+                                        child: Text(
+                                          '${freshArrivals[index].productName}',
+                                          style: TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                       ),
-                                    )),
+                                    ),
                                     Consumer<ShoppingItems>(
-                                        builder: (_, providerPath, child) =>
-                                            FittedBox(
-                                                child: Text(
-                                              '${freshArrivals[index].weight} ${providerPath.weightUnit[freshArrivals[index].weightCategory]}',
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 10,
-                                              ),
-                                            ))),
+                                      builder: (_, providerPath, child) =>
+                                          FittedBox(
+                                        child: Text(
+                                          '${freshArrivals[index].weight} ${providerPath.weightUnit[freshArrivals[index].weightCategory]}',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 10,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                     SizedBox(
                                       height: 5,
                                     ),
@@ -239,78 +249,77 @@ class FreshArrivals extends StatelessWidget {
                                               color: Colors.black54,
                                             )),
                                         Text(
-                                            '${freshArrivals[index].originalPrice}',
-                                            style: TextStyle(
-                                                decoration:
-                                                    TextDecoration.lineThrough,
-                                                fontSize: 10,
-                                                color: Colors.grey)),
-
-
-
-//                                        Consumer<ShoppingItems>(
-//                                          builder:(context, providerPath, child) =>
-//                                                  Consumer<FavouritesList>(
-//                                                        builder: (context, favouritePath, child) => Container(
-//                                                            margin: EdgeInsets.only(left: 20),
-//                                                              child: freshArrivals[index] .isFavourite ? IconButton(
-//                                                       icon: Icon(
-//                                                        Icons.favorite,
-//                                                        size: 20,
-//                                                        color: Theme.of(context)
-//                                                            .accentColor,
-//                                                      ),
-//                                                      onPressed: () {
-//                                                         print('pressed');
-//                                                        providerPath
-//                                                            .changeFavourites(
-//
-//                                                                freshArrivals[
-//                                                                        index]
-//                                                                    .productId);
-//                                                        favouritePath
-//                                                            .removeFavouriteItem(
-//                                                                freshArrivals[
-//                                                                        index]
-//                                                                    .productId);
-//                                                      },
-//                                                    )
-//                                                  : IconButton(
-//
-//                                                      icon: Icon(
-//                                                        Icons.favorite_border,
-//                                                        size: 20,
-//                                                        color: Theme.of(context)
-//                                                            .accentColor,
-//                                                      ),
-//                                                      onPressed: () {
-//                                                        print('pressed');
-//                                                        providerPath
-//                                                            .changeFavourites(
-//                                                                freshArrivals[
-//                                                                        index]
-//                                                                    .productId);
-//                                                        favouritePath
-//                                                            .addFavouriteItem(
-//                                                                freshArrivals[
-//                                                                        index]
-//                                                                    .productId,
-//                                                                freshArrivals[
-//                                                                        index]
-//                                                                    .imageUrl,
-//                                                                freshArrivals[
-//                                                                        index]
-//                                                                    .productName,
-//                                                                freshArrivals[
-//                                                                        index]
-//                                                                    .weight,
-//                                                                freshArrivals[
-//                                                                        index]
-//                                                                    .discountedAmount);
-//                                                      }),
-//                                            ),
-//                                          ),
-//                                        ),
+                                          '${freshArrivals[index].originalPrice}',
+                                          style: TextStyle(
+                                              decoration:
+                                                  TextDecoration.lineThrough,
+                                              fontSize: 10,
+                                              color: Colors.grey),
+                                        ),
+                                        Consumer<FavouritesList>(
+                                          builder: (context, favouritePath,
+                                                  child) => // 2 mins wait
+                                              Consumer<ShoppingItems>(
+                                            builder:
+                                                (context, providerPath, child) {
+                                              print('Checking rebuild');
+                                              return InkWell(
+                                                onTap: () {
+                                                  print('ff pressed');
+                                                  if (freshArrivals[index]
+                                                      .isFavourite) {
+                                                    // remove
+                                                    favouritePath
+                                                        .removeFavouriteItem(
+                                                            freshArrivals[index]
+                                                                .productId);
+                                                    providerPath
+                                                        .changeFavourites(
+                                                            freshArrivals[index]
+                                                                .productId);
+                                                  } else {
+                                                    // add
+                                                    favouritePath.addFavouriteItem(
+                                                        freshArrivals[index]
+                                                            .productId,
+                                                        freshArrivals[index]
+                                                            .imageUrl,
+                                                        freshArrivals[index]
+                                                            .productName,
+                                                        freshArrivals[index]
+                                                            .weight,
+                                                        freshArrivals[index]
+                                                            .discountedAmount);
+                                                    providerPath
+                                                        .changeFavourites(
+                                                            freshArrivals[index]
+                                                                .productId);
+                                                  }
+                                                },
+                                                child: Container(
+                                                  margin:
+                                                      EdgeInsets.only(left: 20),
+                                                  child: freshArrivals[index]
+                                                          .isFavourite
+                                                      ? Icon(
+                                                          Icons.favorite,
+                                                          size: 20,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .accentColor,
+                                                        )
+                                                      : Icon(
+                                                          Icons.favorite_border,
+                                                          size: 20,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .accentColor,
+                                                        ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ],
