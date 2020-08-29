@@ -37,7 +37,7 @@ class ProvidesImages with ChangeNotifier {
     },
     {
       'imageUrl': 'assets/images/category_graphics/Milk_category.png',
-      'category': 'Dairy products',
+      'category': 'Dairy Products',
     },
     {
       'imageUrl': 'assets/images/category_graphics/Beverage_category.png',
@@ -53,7 +53,7 @@ class ProvidesImages with ChangeNotifier {
     },
     {
       'imageUrl': 'assets/images/category_graphics/Egg_category.jpg',
-      'category': 'Eggs',
+      'category': 'Groceries',
     },
 
 

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:grocery_app/widgets/products_grid.dart';
 import 'package:provider/provider.dart';
 
 import 'package:grocery_app/providers/image_provider.dart';
 import 'package:grocery_app/providers/single_item_provider.dart';
 import 'package:grocery_app/widgets/featured_widget.dart';
-import'package:grocery_app/widgets/freshArrivals_widget.dart';
-
-
+import 'package:grocery_app/widgets/freshArrivals_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -17,21 +16,18 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-
-
     final featuredProducts = [
-      ...Provider.of<ShoppingItems>(context,listen: false).featuredProducts
+      ...Provider.of<ShoppingItems>(context,listen:false).featuredProducts
     ];
-    final bestValues=[
-      ...Provider.of<ShoppingItems>(context,listen: false).bestValues
-    ];
-    final freshArrivals = [
-      ...Provider.of<ShoppingItems>(context,listen: false).freshArrivals
+    final bestValues = [
+      ...Provider.of<ShoppingItems>(context, listen: false).bestValues
     ];
     final carouselImages = Provider.of<ProvidesImages>(
-      context,listen: false,
+      context,
+      listen: false,
     ).carouselImages;
-    final categoryImages = Provider.of<ProvidesImages>(context).shopByCategory;
+    final categoryImages =
+        Provider.of<ProvidesImages>(context, listen: false).shopByCategory;
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -199,57 +195,73 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: categoryImages.length,
-                itemBuilder: (context, index) => Container(
-                  margin: EdgeInsets.only(
-                    bottom: 5,
-                    left: 14,
-                    right: 5,
-                  ),
-                  width: 90,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Theme.of(context).primaryColor.withOpacity(0.8),
-                        width: 1.5),
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey[400],
-                        offset: Offset(4, 4),
-                        blurRadius: 4.0,
-                        spreadRadius: 1,
-                      ),
-                      BoxShadow(
-                        color: Colors.white,
-                        offset: Offset(-4, -4),
-                        blurRadius: 4.0,
-                        spreadRadius: 1,
-                      ),
-                    ],
-                    color: Colors.white,
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        height: 80,
-                        alignment: Alignment.topCenter,
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            child: Image.asset(
-                                categoryImages[index]['imageUrl'],
-                                fit: BoxFit.fill)),
-                      ),
-                      FittedBox(
-                        child: Container(
-                          margin: EdgeInsets.only(top: 5),
-                          child: Text(
-                            '${categoryImages[index]['category']}',
-                            style: TextStyle(
-                              color: Colors.black,
+                itemBuilder: (context, index) => InkWell(
+                  splashColor: Theme.of(context).primaryColor.withOpacity(0.5),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ProductsGrid(
+                              title: categoryImages[index]['category'],
+                              products: [
+                                ...Provider.of<ShoppingItems>(context)
+                                    .searchByCategory(
+                                    categoryImages[index]['category'])
+                              ],
+                            )),);
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(
+                      bottom: 5,
+                      left: 14,
+                      right: 5,
+                    ),
+                    width: 90,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color:
+                              Theme.of(context).primaryColor.withOpacity(0.8),
+                          width: 1.5),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey[400],
+                          offset: Offset(4, 4),
+                          blurRadius: 4.0,
+                          spreadRadius: 1,
+                        ),
+                        BoxShadow(
+                          color: Colors.white,
+                          offset: Offset(-4, -4),
+                          blurRadius: 4.0,
+                          spreadRadius: 1,
+                        ),
+                      ],
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          height: 80,
+                          alignment: Alignment.topCenter,
+                          child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              child: Image.asset(
+                                  categoryImages[index]['imageUrl'],
+                                  fit: BoxFit.fill)),
+                        ),
+                        FittedBox(
+                          child: Container(
+                            margin: EdgeInsets.only(top: 5),
+                            child: Text(
+                              '${categoryImages[index]['category']}',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
                             ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -262,7 +274,7 @@ class _HomeScreenState extends State<HomeScreen> {
               products: featuredProducts,
             ),
             FreshArrivals(
-              freshArrivals: freshArrivals,
+              title: 'Fresh Arrivals',
             ),
             SizedBox(
               height: 10,
@@ -271,11 +283,9 @@ class _HomeScreenState extends State<HomeScreen> {
               title: 'Best Values ',
               products: bestValues,
             ),
-
           ],
         ),
       ),
     );
   }
 }
-

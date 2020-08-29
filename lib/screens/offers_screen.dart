@@ -12,7 +12,6 @@ class _OfferScreenState extends State<OfferScreen> {
         height:MediaQuery.of(context).size.height,
         width:MediaQuery.of(context).size.width,
         color: Theme.of(context).backgroundColor,
-
       ),
     );
   }
