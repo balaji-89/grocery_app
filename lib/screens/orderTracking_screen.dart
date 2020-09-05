@@ -1,19 +1,7 @@
-import'package:flutter/material.dart';
-class OrderTrackingScreen extends StatefulWidget {
-  @override
-  _OrderTrackingScreenState createState() => _OrderTrackingScreenState();
-}
-
-class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        height:MediaQuery.of(context).size.height,
-        width:MediaQuery.of(context).size.width,
-        color: Theme.of(context).accentColor,
-
-      ),
-    );
-  }
-}
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\LENOVO\AndroidStudioProjects\grocery_app\android\app\src\main\AndroidManifest.xml:1:1-30:12
+INJECTED from C:\Users\LENOVO\AndroidStudioProjects\grocery_app\android\app\src\main\AndroidManifest.xml:1:1-30:12
+INJECTED from C:\Users\LENOVO\AndroidStudioProjects\grocery_app\android\app\src\main\AndroidManifest.xml:1:1-30:12
+INJECTED from C:\Users\LENOVO\AndroidStudioProjects\grocery_app\android\app\src\main\AndroidManifest.xml:1:1-30:12
+MERGED from C:\Users\LENOVO\Andr call pick call
